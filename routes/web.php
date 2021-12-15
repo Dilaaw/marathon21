@@ -32,6 +32,7 @@ Route::get("/profil", function () {
     return view('profil');
 })->name("profil");
 
+Route::get("/liste",[\App\Http\Controllers\ListeController::class, 'getListe'])->name('welcome');
 
 Route::fallback(function () {
     return view('404');
