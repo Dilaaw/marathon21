@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    C'est la page générale du site,
-    <br />
-    on doit y voir les dernières séries par exemple.
+
+    <h1>Les dernières sorties :</h1>
+
+    @if(!empty($recentSeries))
+        @foreach($recentSeries as $serie)
+            <p>{{$serie -> nom}}</p>
+        @endforeach
+    @else
+        <h3>Aucune série</h3>
+    @endif
 @endsection
