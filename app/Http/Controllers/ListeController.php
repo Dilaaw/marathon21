@@ -15,12 +15,15 @@ class ListeController extends Controller
     public function index()
     {
         $series = Serie::all();
-        return view('liste', ['series' => $series]);
+        return view('welcome', ['series' => $series]);
     }
 
-    public function getListe(){
-
+    public function getListe()
+    {
+        $series = Serie::all();
+        echo $series;
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +53,7 @@ class ListeController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -61,7 +64,8 @@ class ListeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $serie = Serie::find($id);
+        return view('series.edit', ['serie' => $serie]);
     }
 
     /**
