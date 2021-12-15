@@ -5,10 +5,6 @@
 
     <h1>Liste des épisodes :</h1>
 
-
-
-    @yield('form')
-
     <form method="get">
         <label for="genre">Choisir genre</label>
         <input type="text" id="genre" name="genre" list="listGenre" />
