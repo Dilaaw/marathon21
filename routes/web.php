@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SerieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::any('/', function () {
     return view('welcome');
-});
+});*/
+Route::any('/', [SerieController::class, 'getRecent'])->name('welcome');
 
 Route::any('/serie', function () {
     return view('DetailSerie');
