@@ -46,6 +46,12 @@ color: white;
  .register-input{
     border: solid #FB4369 2px;
  }
+ .login-input::-moz-placeholder, .register-input::-moz-placeholder{
+     color : white;
+ }
+ .login-input:-ms-input-placeholder, .register-input:-ms-input-placeholder{
+     color : white;
+ }
  .login-input::placeholder, .register-input::placeholder{
      color : white;
  }
