@@ -21,7 +21,20 @@ class ListeController extends Controller
     public function getListe()
     {
         $series = Serie::all();
-        return view('liste', ['series' => $series]);
+        $saisons = [];
+
+        foreach ($series as $serie) {
+            $episodes = $serie->episodes;
+
+            $episodes->sortByDesc('saison');
+            //dd($episodes);
+            $saison[$serie->id] = $episodes->Last()->saison;
+            //echo "<p>". $serie->nom . " possède :" . $saison[$serie->id] . " saisons.</p>";
+        }
+
+
+
+        return view('liste', ['series' => $series, 'saisons' => $saison]);
     }
 
     /**
