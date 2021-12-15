@@ -17,6 +17,10 @@ Route::any('/', function () {
     return view('welcome');
 });
 
+Route::any('/serie', function () {
+    return view('DetailSerie');
+});
+
 Route::get("/login", function () {
     return view('auth/login');
 })->name('login');
