@@ -82,3 +82,14 @@ color: white;
      font-size : 3rem;
      padding: 5% 0;
  }
+
+ .last-series{
+     width : 210px;
+     height: 295px;
+     background-color: #4DB8E6; 
+ }
+
+ .last-series-container{
+     display: flex;
+     justify-content: space-around;
+ }
