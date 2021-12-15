@@ -13,7 +13,7 @@
 <body>
 <header>
     <a href="{{ url('/') }}">
-        Ma super appli
+        <img src="{{ ('/public/img/Logo.png') }}" alt="TV List">
     </a>
 </header>
 <!-- Authentication Links -->

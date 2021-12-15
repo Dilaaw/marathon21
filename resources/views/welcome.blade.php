@@ -5,6 +5,7 @@
     <h1>Les dernières sorties :</h1>
 
     @if(!empty($recentSeries))
+    <img src="C:\Users\chris\Desktop\marathon21\public\img\Fleched.png">
     <div class = "last-series-container">
         @foreach($recentSeries as $serie)
             <div class="last-series">

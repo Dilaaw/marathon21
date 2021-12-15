@@ -84,6 +84,10 @@ color: white;
  }
 
  .last-series-container{
-     display: flex;
-     justify-content: space-around;
+   position: relative;
+ }
+
+ .last-series{
+     position: absolute;
+     top : 0;
  }
