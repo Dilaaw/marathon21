@@ -17,4 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::post("/login", );
+Route::get("/login", function () {
+    return view('auth/login');
+})->name('login');
+
+Route::get("/register", function () {
+    return view('auth/register');
+})->name('register');
+
+Route::get("/profil", function () {
+    return view('profil');
+})->name("profil");
+
+
+Route::fallback(function () {
+    return view('404');
+});
