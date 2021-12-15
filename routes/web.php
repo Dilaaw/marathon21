@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListeController;
 use App\Http\Controllers\SerieController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::get("/profil", function () {
     return view('profil');
 })->name("profil");
 
-Route::get("/liste",[\App\Http\Controllers\ListeController::class, 'getListe'])->name('liste');
+Route::get("/liste",[ListeController::class, 'getListe'])->name('liste');
 
 Route::fallback(function () {
     return view('404');

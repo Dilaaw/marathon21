@@ -21,8 +21,19 @@ class SerieController extends Controller
     public function getRecent()
     {
         $series = Serie::all();
-        $date = date("Y-m-d");
-        echo $date;
+        $series = $series->sortByDesc('premiere');
+        $recentSeries = [];
+        $cpt = 0;
+        foreach ($series as $serie) {
+            if ($cpt < 5) {
+                //echo "<p style='color: red;'>" . $serie->nom . "</p>";
+                $recentSeries[] = $serie;
+                $cpt++;
+            } else {
+                break;
+            }
+        }
+        return view('welcome', ['recentSeries' => $recentSeries]);
     }
 
     /**

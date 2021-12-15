@@ -21,7 +21,7 @@ class ListeController extends Controller
     public function getListe()
     {
         $series = Serie::all();
-        echo $series;
+        return view('liste', ['series' => $series]);
     }
 
     /**
