@@ -2,47 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Episode;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 
-class SerieController extends Controller
+class ListeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
         $series = Serie::all();
         return view('welcome', ['series' => $series]);
     }
 
-    public function getSerie($id){
-        $serie =Serie::find($id);
-        $episodes=$serie->episodes;
-        $comments=$serie->comments;
-        return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
-    }
+    public function getListe($genrechoisi = "all")
+    {
+        $series = [];
+        if ($genrechoisi != "all") {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($genrechoisi == $serie->genre) {
+                    $series[] = $serie;
+                }
+            }
+        } else {
+            $series = Serie::all();
+        }
 
-    public function getRecent(){
-        $series = Serie::all();
-        $series = $series->sortByDesc('premiere');
-        $recentSeries = [];
-        $cpt = 0;
+
+        $saisons = [];
+        $genres = [];
+
         foreach ($series as $serie) {
-            if ($cpt < 5) {
-                //echo "<p style='color: red;'>" . $serie->nom . "</p>";
-                $recentSeries[] = $serie;
-                $cpt++;
-            } else {
-                break;
+            // On récupère tout les genres possibles pour les boutons de tri par genre
+            if (!in_array($serie->genre, $genres)) {
+                $genres[] = $serie->genre;
             }
         }
-        return view('welcome', ['recentSeries' => $recentSeries]);
+
+        foreach ($series as $serie) {
+
+            if ($genrechoisi != "all") {
+
+            } else {
+
+            }
+
+
+
+            // On récupère le nombre de saisons des séries
+            $episodes = $serie->episodes;
+            $episodes->sortByDesc('saison');
+            $saison[$serie->id] = $episodes->Last()->saison;
+
+        }
+
+
+
+        return view('liste', ['series' => $series, 'saisons' => $saison, 'genres' => $genres]);
     }
 
     /**
@@ -111,5 +131,4 @@ class SerieController extends Controller
     {
         //
     }
-
 }
