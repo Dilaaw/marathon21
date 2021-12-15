@@ -18,6 +18,9 @@ class ListeController extends Controller
         return view('liste', ['series' => $series]);
     }
 
+    public function getListe(){
+
+    }
     /**
      * Show the form for creating a new resource.
      *

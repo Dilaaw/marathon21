@@ -32,9 +32,7 @@ Route::get("/profil", function () {
     return view('profil');
 })->name("profil");
 
-Route::get("/liste", function () {
-    return view('liste');
-})->name("liste");
+Route::get("/liste",[SerieController::class, 'getListe'])->name('welcome');
 
 Route::fallback(function () {
     return view('404');
