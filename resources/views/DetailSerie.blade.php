@@ -1,36 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-    Résume:
-    <?php
-   $bdd=new PDO('sqlite:host=localhost;dbname=db;charset=utf8','root',/*MDP:*/'root');
+    Détail de la serie:
+    <br>
+    <br>
+    @if(!empty($serie))
 
-
-   $requete= $bdd->query('select nom,resume,genre,note
-                                from serie
-                                order by id desc
-
-                                ');
-
-   echo'<table border>
+           Pour la série : {{$serie -> nom}}<br>
+           Le genre est : {{$serie -> genre}}<br>
+           Petit résume : {{$serie -> resume}}<br>
+           La langue disponible est : {{$serie -> langue}}<br>
+           Cette serie est sorti : {{$serie -> premiere}}<br>
+           La redaction a dit : {{$serie -> avis}}<br><br>
+           <img src=" {{ asset($serie -> urlImage) }}"/><br>
+            <table border>
+                <thead>
                     <tr>
+                        <th>Saison:</th>
+                        <th>N°</th>
                         <th>Nom</th>
+                        <th>Image</th>
                         <th>Resume</th>
-                        <th>Genre</th>
-                        <th>Note</th>
-                    </tr>';
-   while($donnees=$requete->fetch()){
+                    </tr>
+                </thead>
+                @foreach($episodes as $episode)
+                    <tbody>
+                        <tr>
+                            <td>{{$episode->saison}}</td>
+                            <td>{{$episode->numero}}</td>
+                            <td>{{$episode->nom}}</td>
+                            <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
+                            <td>{{$episode->resume}}</td>
+                        </tr>
+                    </tbody>
+                @endforeach
+            </table>
+            <br><br>
+           Commentaires :<br>
+           @foreach($comments as $comments)
+               <br>
+                {{$comments->content}}<br>
+               <br>
+           @endforeach
 
-       echo'<tr>
-                    <td>'.$donnees['nom'].'</td>
-                    <td>'.$donnees['resume'].'</td>
-                    <td>'.$donnees['genre'].'</td>
-                    <td>'.$donnees['note'].'</td>
-                </tr>';
 
 
-   }
-   echo'</table>';
-?>
 
+    @else
+        <h3>Aucune série</h3>
+    @endif
 @endsection
