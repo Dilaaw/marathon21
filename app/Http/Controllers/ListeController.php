@@ -18,23 +18,51 @@ class ListeController extends Controller
         return view('welcome', ['series' => $series]);
     }
 
-    public function getListe()
+    public function getListe($genrechoisi = "all")
     {
-        $series = Serie::all();
+        $series = [];
+        if ($genrechoisi != "all") {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($genrechoisi == $serie->genre) {
+                    $series[] = $serie;
+                }
+            }
+        } else {
+            $series = Serie::all();
+        }
+
+
         $saisons = [];
+        $genres = [];
 
         foreach ($series as $serie) {
-            $episodes = $serie->episodes;
+            // On récupère tout les genres possibles pour les boutons de tri par genre
+            if (!in_array($serie->genre, $genres)) {
+                $genres[] = $serie->genre;
+            }
+        }
 
+        foreach ($series as $serie) {
+
+            if ($genrechoisi != "all") {
+
+            } else {
+
+            }
+
+
+
+            // On récupère le nombre de saisons des séries
+            $episodes = $serie->episodes;
             $episodes->sortByDesc('saison');
-            //dd($episodes);
             $saison[$serie->id] = $episodes->Last()->saison;
-            //echo "<p>". $serie->nom . " possède :" . $saison[$serie->id] . " saisons.</p>";
+
         }
 
 
 
-        return view('liste', ['series' => $series, 'saisons' => $saison]);
+        return view('liste', ['series' => $series, 'saisons' => $saison, 'genres' => $genres]);
     }
 
     /**
