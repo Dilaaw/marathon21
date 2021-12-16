@@ -27,13 +27,9 @@ class SerieController extends Controller
         $serie =Serie::find($id);
         $episodes=$serie->episodes;
         $comments=$serie->comments;
-        if (Auth::user()) {
-            return view('addComment', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
-        } else {
-            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
-        }
+
+        return view('addComment', ['serie' => $serie,'episodes' =>$episodes, 'comments' =>$comments, 'saisons' => ListeController::class->getNbSaison([$serie])]);
+
 
     }
 
