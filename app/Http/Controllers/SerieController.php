@@ -35,7 +35,7 @@ class SerieController extends Controller
 
     public function getRecent(){
         $series = Serie::all();
-        $series = $series->sortBy('premiere');
+        $series = $series->sortByDesc('premiere');
         $recentSeries = [];
         $cpt = 0;
         foreach ($series as $serie) {
