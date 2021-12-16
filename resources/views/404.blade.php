@@ -1,1 +1,1 @@
-<h1>404 Error : Not Found</h1>
+<img src="{{asset("img/404.png")}}">
