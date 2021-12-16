@@ -31,7 +31,12 @@
 
         Séries vues :
 
+        @foreach($seen as $seens)
+            {{$seens->episode_id}}<br>
+        @endforeach
 
+    @else
+        T'es pas co Khoya
     @endif
 @endsection
 

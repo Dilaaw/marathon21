@@ -35,9 +35,7 @@ Route::get("/register", function () {
     return view('auth/register');
 })->name('register');
 
-Route::get("/profil", function () {
-    return view('profil');
-})->name("profil");
+Route::get("/profil/{id}", [\App\Http\Controllers\UserController::class, 'getVisionnes'])->name('profil');
 
 Route::get("/liste", [ListeController::class, 'index'])->name('liste');
 

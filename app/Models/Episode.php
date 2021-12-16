@@ -20,4 +20,10 @@ class Episode extends Model {
     public function serie() {
         return $this->belongsTo(Serie::class, "serie_id");
     }
+
+    function seen() {
+        return $this->belongsToMany(User::class, 'seen')
+            ->as('when')
+            ->withPivot('date_seen');
+    }
 }
