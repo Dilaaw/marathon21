@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Utils;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ListeController extends Controller
 {
@@ -14,56 +17,71 @@ class ListeController extends Controller
      */
     public function index()
     {
-        $series = Serie::all();
-        return view('welcome', ['series' => $series]);
+        $languechoisie = (empty($_GET['langue'])) ? 'all' : $_GET['langue'];
+        $genrechoisi = (empty($_GET['genre'])) ? 'all' : $_GET['genre'];
+
+        $allSeries = Serie::all();
+        $series = [];
+        foreach ($allSeries as $serie) {
+            if     (($serie->genre == $genrechoisi && $serie->langue == $languechoisie) //Si le genre est Set + bon et que la langue aussi
+                || ($genrechoisi == "all" && $serie->langue == $languechoisie) // Si le genre n'est pas set mais que la langue si et est bonne
+                || ($serie->genre == $genrechoisi && $languechoisie == "all") // Si genre set et bon + langue pas set
+                || ($genrechoisi == "all" && $languechoisie == "all")) // Si rien de set
+            {
+                $series[] = $serie;
+            }
+        }
+        return view('liste', ['series' => $series,'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $this->getNbSaison($series)]);
     }
 
-    public function getListe($genrechoisi = "all")
-    {
-        $series = [];
-        if ($genrechoisi != "all") {
-            $allSeries = Serie::all();
-            foreach ($allSeries as $serie) {
-                if ($genrechoisi == $serie->genre) {
-                    $series[] = $serie;
-                }
-            }
-        } else {
-            $series = Serie::all();
-        }
-
-
-        $saisons = [];
+    public function getAllGenre($allSeries) {
         $genres = [];
-
-        foreach ($series as $serie) {
-            // On récupère tout les genres possibles pour les boutons de tri par genre
+        foreach ($allSeries as $serie) {
             if (!in_array($serie->genre, $genres)) {
                 $genres[] = $serie->genre;
             }
         }
-
-        foreach ($series as $serie) {
-
-            if ($genrechoisi != "all") {
-
-            } else {
-
+        return $genres;
+    }
+    public function getAllLangue($allSeries) {
+        $langues = [];
+        foreach ($allSeries as $serie) {
+            if (!in_array($serie->langue, $langues)) {
+                $langues[] = $serie->langue;
             }
-
-
-
-            // On récupère le nombre de saisons des séries
+        }
+        return $langues;
+    }
+    public function getNbSaison($series) {
+        $saisons = [];
+        foreach ($series as $serie) {
             $episodes = $serie->episodes;
             $episodes->sortByDesc('saison');
-            $saison[$serie->id] = $episodes->Last()->saison;
-
+            $saisons[$serie->id] = $episodes->last()->saison;
         }
-
-
-
-        return view('liste', ['series' => $series, 'saisons' => $saison, 'genres' => $genres]);
+        return $saisons;
     }
+
+    /*
+     * Show the detailed page of the serie
+     */
+    public function getByName() {
+        if (isset($_GET['search'])) {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($serie->nom == $_GET['search']) {
+                    $episodes=$serie->episodes;
+                    $comments=$serie->comments;
+                    break;
+                }
+            }
+            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+        } else {
+            echo "Erreur PAs de recherche mais appelé";
+        }
+        return view('404');
+    }
+
 
     /**
      * Show the form for creating a new resource.

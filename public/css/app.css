@@ -23,7 +23,7 @@ a{
  }
 
  .login, .register{
-        margin: 0 auto;
+        margin: 10% auto;
         background-color: #36393F;
         width: 800px;
         height: 500px;
