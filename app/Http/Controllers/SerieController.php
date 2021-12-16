@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use App\Models\Serie;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SerieController extends Controller
@@ -25,7 +26,8 @@ class SerieController extends Controller
         $serie =Serie::find($id);
         $episodes=$serie->episodes;
         $comments=$serie->comments;
-        return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+        return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
+                                            'comments' =>$comments]);
     }
 
     public function getRecent(){
