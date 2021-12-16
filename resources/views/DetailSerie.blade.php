@@ -8,12 +8,12 @@
             <div class="info-serie">
             <img src=" {{ asset($serie -> urlImage) }}"/><br>
             <div class="txt-serie">
-         <h1 style="text-align : center"> <?php echo (html_entity_decode($serie -> nom));?></h1>
-           <div class="ifo-genre"> <b>Genre :</b> <?php echo (html_entity_decode($serie -> genre));?></div>
-           <div class="ifo-resume"><br><b>Résumé : </b><?php echo (html_entity_decode($serie -> resume));?></div>
-           <div class="ifo-vo"> <b>VO :</B> <?php echo (html_entity_decode($serie -> langue));?></div>
-           <div class="ifo-sortie">  <b>Date de parution</b> : <?php echo (html_entity_decode($serie -> premiere));?></div>
-           <div class="ifo-avis"> <b>Avis de la redac :</b> <?php echo (html_entity_decode($serie -> avis));?></div>
+            <h1 style="text-align : center"> {{$serie -> nom}}</h1>
+           <div class="ifo-genre"> <b>Genre :</b> {{$serie -> genre}}</div>
+           <div class="ifo-resume"><br><b>Résumé : </b>{{$serie -> resume}};?></div>
+           <div class="ifo-vo"> <b>VO :</B> {{$serie -> langue}}</div>
+           <div class="ifo-sortie">  <b>Date de parution</b> {{$serie -> premiere}}</div>
+           <div class="ifo-avis"> <b>Avis de la redac :</b> {{$serie -> avis}}</div>
             </div>
             </div>
 
