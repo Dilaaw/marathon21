@@ -4,6 +4,7 @@
     Détail de la serie:
     <br>
     <br>
+    <br>
     @if(!empty($serie))
             <div class="info-serie">
             <img src=" {{ asset($serie -> urlImage) }}"/><br>
