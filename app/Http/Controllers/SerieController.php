@@ -27,13 +27,11 @@ class SerieController extends Controller
         $serie =Serie::find($id);
         $episodes=$serie->episodes;
         $comments=$serie->comments;
-        if (Auth::user()) {
-            return view('addComment', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
-        } else {
-            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
-        }
+        $nbrSaison = $episodes->sortBy('saison')->last()->saison;
+
+
+        return view('addComment', ['serie' => $serie,'episodes' =>$episodes, 'comments' =>$comments, 'saison' => $nbrSaison]);
+
 
     }
 
