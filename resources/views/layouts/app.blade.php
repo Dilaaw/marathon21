@@ -47,6 +47,9 @@
 <div id="main">
     @yield('content')
 </div>
+</div>
+
+<!-- Scripts -->
 <footer>
 <span>Site créé par la ShrekTeam - Tout droits reservés</span>
 <a href="{{ url('/') }}">
@@ -54,8 +57,6 @@
         <img class="footer-logo" src="/img/Logo.png" alt="TV List">
     </a>
 </footer>
-<!-- Scripts -->
-
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
