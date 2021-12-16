@@ -237,10 +237,15 @@ right: 41%;
     height: 100%;
     display: none;
     text-align: center;
+    color : white
    
    }
 
 .series:hover .series-detail{
+   display: block;
+}
+
+.last-series:hover  .series-detail{
    display: block;
 }
 

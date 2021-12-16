@@ -11,6 +11,8 @@ require('./bootstrap');
  LastSeries[1].id = 'last-series4';
  LastSeries[2].id = 'last-series5';
 
+ 
+
  document.getElementById('welcome-caroussel-suiv').addEventListener('click', function (){
 
     console.log ('suiv');

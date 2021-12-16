@@ -11,8 +11,14 @@
 
         @foreach($recentSeries as $serie)
             <div class="last-series">
-          
+            
             <img src='{{$serie -> urlImage}}' alt='{{$serie -> nom}}'></img>
+            <div class="series-detail">
+                <h5> {{$serie -> nom}} </h5>
+                <p>Genre : {{$serie -> genre}} </p>
+                <p>Langue : {{$serie -> langue}}</p>
+           
+                </div>
 
         </div>
         @endforeach
