@@ -12,23 +12,20 @@
     </form>
 
     <form method="get">
-        <label for="genre">Choisir genre</label>
+        <label for="genre">Choisir genre :</label>
         <input type="text" id="genre" name="genre" list="listGenre" />
         <datalist id="listGenre">
             @foreach($genres as $genre)
                 <option>{{$genre}}</option>
             @endforeach
         </datalist>
-
-        <label for="langue">Choisir langue</label>
+        <label for="langue">Choisir langue :</label>
         <input type="text" id="langue" name="langue" list="listLangue" />
         <datalist id="listLangue">
             @foreach($langues as $langue)
                 <option>{{$langue}}</option>
             @endforeach
         </datalist>
-
-
         <input type="submit" value="Filtrer">
     </form>
 

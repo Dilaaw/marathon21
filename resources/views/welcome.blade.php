@@ -18,7 +18,7 @@
         <h3>Aucune série</h3>
     @endif
 
-    <a href="{{route('all_series')}}">
+    <a href="{{route('liste')}}">
         <h1>Go voir la liste entière des séries dispo</h1>
     </a>
 

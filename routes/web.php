@@ -39,7 +39,7 @@ Route::get("/profil", function () {
     return view('profil');
 })->name("profil");
 
-Route::get("/liste", [ListeController::class, 'getListe'])->name('all_series');
+Route::get("/liste", [ListeController::class, 'index'])->name('liste');
 
 
 

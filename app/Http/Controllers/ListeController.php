@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Utils;
-use PhpParser\Node\Expr\Cast\Object_;
+use function PHPUnit\Framework\isEmpty;
 
 class ListeController extends Controller
 {
@@ -17,61 +15,21 @@ class ListeController extends Controller
      */
     public function index()
     {
-        $allSeries = Serie::all();
-        $saisons = [];
-        foreach ($allSeries as $serie) {
-            $saisons[$serie->id] = $this->getNbSaison($serie);
-        }
-        return view('liste', ['series' => $allSeries, 'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $saisons]);
-    }
+        $languechoisie = (empty($_GET['langue'])) ? 'all' : $_GET['langue'];
+        $genrechoisi = (empty($_GET['genre'])) ? 'all' : $_GET['genre'];
 
-    public function getByName() {
-        if (isset($_GET['search'])) {
-            $allSeries = Serie::all();
-            foreach ($allSeries as $serie) {
-                if ($serie->nom == $_GET['search']) {
-                    echo $serie->id;
-                    $episodes=$serie->episodes;
-                    $comments=$serie->comments;
-                    break;
-                }
-            }
-            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
-        } else {
-            echo "Erreur PAs de recherche mais appelé";
-        }
-        return view('404');
-    }
-
-    public function getListe()
-    {
-        if (isset($_GET['langue'])){
-            $languechoisie = $_GET['langue'];
-        } else {
-            $languechoisie ="all";
-        }
-        if (isset($_GET['genre'])) {
-            $genrechoisi = $_GET['genre'];
-        } else {
-            $genrechoisi = "all";
-        }
         $allSeries = Serie::all();
         $series = [];
-        $saisons= [];
-
         foreach ($allSeries as $serie) {
-            if     ($serie->genre == $genrechoisi && $serie->langue == $languechoisie
-                || ($genrechoisi == "all" && $serie->langue == $languechoisie)
-                || ($serie->genre == $genrechoisi && $languechoisie == "all"
-                    || ($genrechoisi == "all" && $languechoisie == "all")))
+            if     (($serie->genre == $genrechoisi && $serie->langue == $languechoisie) //Si le genre est Set + bon et que la langue aussi
+                || ($genrechoisi == "all" && $serie->langue == $languechoisie) // Si le genre n'est pas set mais que la langue si et est bonne
+                || ($serie->genre == $genrechoisi && $languechoisie == "all") // Si genre set et bon + langue pas set
+                || ($genrechoisi == "all" && $languechoisie == "all")) // Si rien de set
             {
                 $series[] = $serie;
             }
         }
-        foreach ($series as $serie) {
-            $saisons[$serie->id] = $this->getNbSaison($serie);
-        }
-        return view('liste', ['series' => $series,'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $saisons]);
+        return view('liste', ['series' => $series,'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $this->getNbSaison($series)]);
     }
 
     public function getAllGenre($allSeries) {
@@ -92,13 +50,35 @@ class ListeController extends Controller
         }
         return $langues;
     }
-    public function getNbSaison($serie) {
-        $episodes = $serie->episodes;
-        $episodes->sortByDesc('saison');
-        return $episodes->last()->saison;
+    public function getNbSaison($series) {
+        $saisons = [];
+        foreach ($series as $serie) {
+            $episodes = $serie->episodes;
+            $episodes->sortByDesc('saison');
+            $saisons[$serie->id] = $episodes->last()->saison;
+        }
+        return $saisons;
     }
 
-
+    /*
+     * Show the detailed page of the serie
+     */
+    public function getByName() {
+        if (isset($_GET['search'])) {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($serie->nom == $_GET['search']) {
+                    $episodes=$serie->episodes;
+                    $comments=$serie->comments;
+                    break;
+                }
+            }
+            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+        } else {
+            echo "Erreur PAs de recherche mais appelé";
+        }
+        return view('404');
+    }
 
 
     /**
