@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ListeController;
 use App\Http\Controllers\SerieController;
 use Illuminate\Support\Facades\Route;
 
