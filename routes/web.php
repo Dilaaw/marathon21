@@ -23,6 +23,9 @@ Route::any('/', function () {
 Route::any('/', [SerieController::class, 'getRecent'])->name('welcome');
 
 Route::any('/serie/{id}', [SerieController::class,'getSerie']);
+Route::any('/serie', [ListeController::class, 'getByName']);
+
+
 
 Route::get("/login", function () {
     return view('auth/login');

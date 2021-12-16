@@ -6,7 +6,7 @@
     <h1>Liste des épisodes :</h1>
 
 
-    <form method="get">
+    <form action="/serie" method="get">
         <input type="text" placeholder="Rechercher" name="search">
         <input type="submit">
     </form>
@@ -36,7 +36,7 @@
     @if(!empty($series))
         @foreach($series as $serie)
 
-            <a href="">
+            <a href="/serie/{{$serie->id}}">
                 <div style="border: solid blue 1px; margin: 10px;">
                 <img src="{{asset($serie -> urlImage)}}">
                 <p>Nom : {{$serie -> nom}} </p>

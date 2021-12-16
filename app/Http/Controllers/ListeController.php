@@ -25,14 +25,26 @@ class ListeController extends Controller
         return view('liste', ['series' => $allSeries, 'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $saisons]);
     }
 
+    public function getByName() {
+        if (isset($_GET['search'])) {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($serie->nom == $_GET['search']) {
+                    echo $serie->id;
+                    $episodes=$serie->episodes;
+                    $comments=$serie->comments;
+                    break;
+                }
+            }
+            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+        } else {
+            echo "Erreur PAs de recherche mais appelé";
+        }
+        return view('404');
+    }
+
     public function getListe()
     {
-
-        if (isset($_GET['search'])){
-            return $this->getByName($_GET['search']);
-
-        }
-
         if (isset($_GET['langue'])){
             $languechoisie = $_GET['langue'];
         } else {
@@ -86,16 +98,7 @@ class ListeController extends Controller
         return $episodes->last()->saison;
     }
 
-    public function getByName($name) {
-        $allSeries = Serie::all();
-        foreach ($allSeries as $serie) {
-            if ($serie->nom == $name) {
-                //echo $serie->id . $serie->nom;
-                $str = "/serie/".$serie->id;
-                return view($str, [SerieController::class,'getSerie']);
-            }
-        }
-    }
+
 
 
     /**
