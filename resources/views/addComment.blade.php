@@ -4,17 +4,16 @@
 
 
     @if (Auth::user())
-        <form action=".addComment" method="post">
-            <label for="commentaire">
-                Commentaire :
-                <input type="textarea" name="commentaire" rows="5" cols="33">
-            </label>
-            <label for="note">
-                Note :
-                <input type="number" name="note">
-            </label>
+        <form class ="addcomment" action=".addComment" method="post">
+        
+                
+                <textarea style="width: 50rem; height: 15rem;" class ="tris" type="" name="commentaire" rows="5" cols="33" placeholder ="Commentaire "   ></textarea>
+          
+                <br/>
+                <input class="tris" type="number" name="note" placeholder ="note">
+            
 
-            <input type="submit" value="Envoyer le commentaire">
+            <input class="tris-btn" type="submit" value="Envoyer ">
         </form>
 
     @else

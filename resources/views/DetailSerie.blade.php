@@ -18,20 +18,7 @@
             </div>
 
             <div class ="saisons">
-                <?php 
-                    
-                    for ($i =1; $i<= $saison; $i++){
-                        if ($i%2==0){
-                            echo '<span class="saison-rose saison-btn" id="saison'.$i.'" >saison '.$i.'</span>';
-                            
-                        }else{
-                            echo '<span class="saison-bleu saison-btn" id=\"saison'.$i.'\" >saison '.$i.'</span>';
-                        }
-                       
-                    }
-                
-                ?>
-                </div>  
+        
             
     
             <div class ="episodes-list">
@@ -41,22 +28,11 @@
                 <h3>Saison {{$i}}</h3>
                 <div class="episodes-group">
                 @foreach($episodes as $episode)
-                    
+                    @if($episode->saison == $i)
                     <div class="episode-container">
-                        <img src="{{ asset($episode -> urlImage) }}" alt="visuel">
+                        <img src="{{ asset($episode -> urlImage) }}" alt="visuel" title="{!!$episode -> resume!!}">
                         <span> {{$episode->numero}} - {{$episode->nom}} </span>
-                    </div>
-                @endforeach
-                </div>
-                </div>
-            
-                @endfor
-            <div>
- 
-                @foreach($episodes as $episode)
-                    <tbody>
-                        <tr>
-                            @if(Auth::user())
+                        @if(Auth::user())
                                 <td><input
                                            type="button"
                                            value="Déjà vu"
@@ -66,23 +42,29 @@
                                     Episode vu !!
                                 @endif
                             @endif
-                           
-                        
-                            <td><?php echo (html_entity_decode($episode -> resume));?></td>
-                            <td style="color: red;">{{$saison}}</td>
-                        </tr>
-                    </tbody>
+                    </div>
+                    @endif
                 @endforeach
-            </table>
-            <br><br>
-           Commentaires :<br>
+                </div>
+                </div>
+            
+                @endfor
+            <div>
+ 
+            @yield('addComment')   
+           <div class = "commentaires">
+               <h3> commentaires </h3>
+               
+                
+           
            @foreach($comments as $comments)
-               <br>
-                {{$comments->content}}<br>
-               <br>
+           <div class="com">
+              
+           <?php echo (html_entity_decode($comments->content));?>
+                </div>
            @endforeach
 
-        @yield('addComment')
+       
 
 
 

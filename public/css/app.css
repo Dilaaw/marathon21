@@ -332,14 +332,10 @@ flex-wrap: wrap;
    text-align: center;
 }
 
-.saison-rose{
-   border: solid #FB4369;
-   color: #FB4369;
-}
+.episodes-list{
 
-.saison-bleu{
-   border: solid  #4DB8E6;
-   color:  #4DB8E6;
+   width : 100%;
+   overflow: hidden;
 }
 
 .episodes-group{
@@ -351,18 +347,27 @@ overflow-x: scroll;
 
 
 }
-.season{
-display: none;
-}
 
-.showseason{
-   display: block;
-}
 
 .episode-container{
-   margin : 0 3%;
+   margin : 0 2%;
 }
 
-.showseason{
-   display: block;
+.saisons{
+   width : 100%;
+   overflow : hidden
 }
+
+.com{
+   border: solid #FB4369 2px;
+   width: 30%;
+   margin : 5% auto;
+
+   
+}
+
+.addcomment{
+   margin: 5% 22%;
+}
+
+
