@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Episode;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,22 @@ class SerieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         $series = Serie::all();
         return view('welcome', ['series' => $series]);
     }
 
-    public function getRecent()
-    {
+    public function getSerie($id){
+        $serie =Serie::find($id);
+        $episodes=$serie->episodes;
+        $comments=$serie->comments;
+        return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+    }
+
+    public function getRecent(){
         $series = Serie::all();
         $series = $series->sortByDesc('premiere');
         $recentSeries = [];
@@ -102,4 +111,5 @@ class SerieController extends Controller
     {
         //
     }
+
 }
