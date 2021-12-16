@@ -17,17 +17,42 @@
             </div>
             </div>
 
-
-            <table >
-                <thead>
-                    <tr>
-                        <th>Saison:</th>
-                        <th>N°</th>
-                        <th>Nom</th>
-                        <th>Image</th>
-                        <th>Resume</th>
-                    </tr>
-                </thead>
+            <div class ="saisons">
+                <?php 
+                    
+                    for ($i =1; $i<= $saison; $i++){
+                        if ($i%2==0){
+                            echo '<span class="saison-rose saison-btn" id="saison'.$i.'" >saison '.$i.'</span>';
+                            
+                        }else{
+                            echo '<span class="saison-bleu saison-btn" id=\"saison'.$i.'\" >saison '.$i.'</span>';
+                        }
+                       
+                    }
+                
+                ?>
+                </div>  
+            
+    
+            <div class ="episodes-list">
+                @for ($i =1; $i<= $saison; $i++)
+                <div id="season{{$i}}" class="season"> 
+            
+                <h3>Saison {{$i}}</h3>
+                <div class="episodes-group">
+                @foreach($episodes as $episode)
+                    
+                    <div class="episode-container">
+                        <img src="{{ asset($episode -> urlImage) }}" alt="visuel">
+                        <span> {{$episode->numero}} - {{$episode->nom}} </span>
+                    </div>
+                @endforeach
+                </div>
+                </div>
+            
+                @endfor
+            <div>
+ 
                 @foreach($episodes as $episode)
                     <tbody>
                         <tr>
@@ -41,10 +66,8 @@
                                     Episode vu !!
                                 @endif
                             @endif
-                            <td>{{$episode->saison}}</td>
-                            <td>{{$episode->numero}}</td>
-                            <td>{{$episode->nom}}</td>
-                            <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
+                           
+                        
                             <td><?php echo (html_entity_decode($episode -> resume));?></td>
                             <td style="color: red;">{{$saison}}</td>
                         </tr>
@@ -67,4 +90,5 @@
     @else
         <h3>Aucune série</h3>
     @endif
+    <script src="{{ asset('js/serie.js') }}"></script>
 @endsection

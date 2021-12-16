@@ -43,4 +43,5 @@ require('./bootstrap');
             console.log(indice +' '+newIndice)
            element.id = 'last-series'+newIndice;
     }}
- });
+ })
+

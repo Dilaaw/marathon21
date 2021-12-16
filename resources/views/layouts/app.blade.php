@@ -57,6 +57,6 @@
         <img class="footer-logo" src="/img/Logo.png" alt="TV List">
     </a>
 </footer>
-<script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
