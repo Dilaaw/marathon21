@@ -39,8 +39,6 @@
             @foreach($content as $contents)
                 {{$contents}}<br>
             @endforeach
-        @else
-            Pas accès
         @endif
 
     @else
