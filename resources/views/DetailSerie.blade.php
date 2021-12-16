@@ -55,7 +55,14 @@
            Commentaires :<br>
            @foreach($comments as $comments)
                <br>
-                {{$comments->content}}<br>
+                {{$comments->content}}
+               @if($comments->validated != 1)
+                   <span style="color: red;">
+                       En attente de validation par un administrateur.
+                   </span>
+               @endif
+
+               <br>
                <br>
            @endforeach
 

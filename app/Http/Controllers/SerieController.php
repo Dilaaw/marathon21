@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Episode;
 use App\Models\Serie;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,14 +23,14 @@ class SerieController extends Controller
 
     public function getSerie($id){
         $serie =Serie::find($id);
+        if (isset($_POST['commentaire']) && isset($_POST['note'])) {
+            $con = new UserController();
+            $con->addComment($_POST, $serie);
+        }
         $episodes=$serie->episodes;
         $comments=$serie->comments;
         $nbrSaison = $episodes->sortBy('saison')->last()->saison;
-
-
         return view('addComment', ['serie' => $serie,'episodes' =>$episodes, 'comments' =>$comments, 'saison' => $nbrSaison]);
-
-
     }
 
     public function getRecent(){

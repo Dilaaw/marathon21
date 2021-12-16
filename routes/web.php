@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ListeController;
 use App\Http\Controllers\SerieController;
+use App\Http\Controllers\UserController;
 use App\Models\Serie;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,7 @@ Route::get("/register", function () {
     return view('auth/register');
 })->name('register');
 
-Route::get("/profil/{id}", [\App\Http\Controllers\UserController::class, 'getVisionnes'])->name('profil');
+Route::get("/profil/{id}", [UserController::class, 'getVisionnes'])->name('profil');
 
 Route::get("/liste", [ListeController::class, 'index'])->name('liste');
 

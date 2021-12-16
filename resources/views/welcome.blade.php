@@ -12,7 +12,9 @@
         @foreach($recentSeries as $serie)
             <div class="last-series">
           
-            <img src='{{$serie -> urlImage}}' alt='{{$serie -> nom}}'></img>
+            <a href="/serie/{{$serie->id}}">
+                <img src='{{$serie -> urlImage}}' alt='{{$serie -> nom}}'>
+            </a>
 
         </div>
         @endforeach
