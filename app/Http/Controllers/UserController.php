@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Serie;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,9 +30,22 @@ class UserController extends Controller
             }
             $cpt+=$el->duree;
         }
-        return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt]);
+        $list = $this->getValider();
+        //
+        //dd($list);
+        return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt,"content"=>$list]);
     }
 
+    public function getValider(){
+        $comments = Comment::all();
+        $list = [];
+        foreach ($comments as $comment){
+            if($comment->validated == 0){
+                $list[]=$comment->content;
+            }
+        }
+        return $list;
+    }
     public function addComment(){
 
     }

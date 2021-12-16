@@ -29,11 +29,19 @@
 
         <br><br>
 
-        Séries vues :
+        Séries vues : <br>
 
         @foreach($seen as $seens)
             {{$seens->nom}}<br>
         @endforeach
+
+        @if(Auth::user()->administrateur== 1)
+            @foreach($content as $contents)
+                {{$contents}}<br>
+            @endforeach
+        @else
+            Pas accès
+        @endif
 
     @else
         Erreur : Vous n'êtes pas connecté !
