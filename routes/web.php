@@ -22,7 +22,8 @@ Route::any('/', function () {
 });*/
 Route::any('/', [SerieController::class, 'getRecent'])->name('welcome');
 
-Route::any('/serie/{id}', [SerieController::class,'getSerie']);
+Route::get('/serie/{id}', [SerieController::class,'getSerie']);
+Route::post('/serie/{id}', [SerieController::class,'store'])->name('serie.store');
 Route::any('/serie', [ListeController::class, 'getByName']);
 
 
