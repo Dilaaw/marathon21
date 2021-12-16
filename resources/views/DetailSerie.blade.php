@@ -59,6 +59,8 @@
                <br>
            @endforeach
 
+        @yield('addComment')
+
 
 
 

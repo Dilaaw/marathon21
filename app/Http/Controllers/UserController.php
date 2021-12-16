@@ -32,6 +32,11 @@ class UserController extends Controller
         dd($lst);
         return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt]);
     }
+
+    public function addComment(){
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
