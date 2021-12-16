@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     Détail de la serie:
     <br>
     <br>
@@ -16,6 +17,7 @@
             <table border>
                 <thead>
                     <tr>
+                        <th>Vu: </th>
                         <th>Saison:</th>
                         <th>N°</th>
                         <th>Nom</th>
@@ -26,11 +28,25 @@
                 @foreach($episodes as $episode)
                     <tbody>
                         <tr>
+                            @if(Auth::user())
+                                <td><input
+                                           type="button"
+                                           value="Déjà vu"
+                                           id="{{$episode->id}}">
+                                </td>
+                                @if(isset($_POST['Déjà vu']))
+                                    Episode vu !!
+                                @endif
+                            @endif
                             <td>{{$episode->saison}}</td>
-                            <td>{{$episode->numero}}</td>
+                            <td>{{$episode->numero}} </td>
                             <td>{{$episode->nom}}</td>
                             <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
-                            <td>{{$episode->resume}}</td>
+                            <td>@if($episode->resume==null)
+                                    Pas de resume    </td>
+                                @else
+                                    {{$episode->resume}}</td>
+                                @endif
                         </tr>
                     </tbody>
                 @endforeach
@@ -42,6 +58,8 @@
                 {{$comments->content}}<br>
                <br>
            @endforeach
+
+        @yield('addComment')
 
 
 

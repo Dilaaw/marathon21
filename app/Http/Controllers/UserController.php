@@ -31,6 +31,11 @@ class UserController extends Controller
         }
         return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt]);
     }
+
+    public function addComment(){
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Utils;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ListeController extends Controller
 {

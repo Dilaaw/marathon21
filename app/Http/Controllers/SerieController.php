@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use App\Models\Serie;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SerieController extends Controller
 {
@@ -25,7 +27,14 @@ class SerieController extends Controller
         $serie =Serie::find($id);
         $episodes=$serie->episodes;
         $comments=$serie->comments;
-        return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,'comments' =>$comments]);
+        if (Auth::user()) {
+            return view('addComment', ['serie' => $serie,'episodes' =>$episodes,
+                'comments' =>$comments]);
+        } else {
+            return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
+                'comments' =>$comments]);
+        }
+
     }
 
     public function getRecent(){

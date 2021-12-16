@@ -1,65 +1,27 @@
 
-@font-face { 	font-family: "Louis George Cafe"; 	src: url('/font/Louis George Cafe.ttf'); }
+
 body{
     margin : 0;
     background-color:  #EEE5E9;
     font-family: 'Louis George Cafe';
-    
 }
 
-header, footer{
+header{
     background-color: #36393F;
-
+    height: 5rem;
     width : 100%;
-    position: absolute;
-   
     
 }
-footer{
-    bottom: 0;
+ 
+header a {
+    color : white;
 }
- header{
-   top: 0;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   text-transform: uppercase;
- }
- header li{
-     list-style: none;
-     display: table-cell;
-     padding: 5px 20px;
-   
- }
+
 a{
      text-decoration: none;
-     color : rgb(255, 255, 255);
      
  }
 
- .header-logo{
-width: 45%;
- margin: 1.5%;
- }
-
- .footer span{
-     text-align: center;
-     color: white;
- }
- .footer-logo{
-    width: 10%;
-     margin-left:89.5%!important;
-     margin : 0.5%;
-     }
-    
-.nav-rose{
-    color : #FB4369;
-}
-
-.nav-bleu{
-    color : #4DB8E6 ;
-    
-}
  .login, .register{
         margin: 10% auto;
         background-color: #36393F;
@@ -124,101 +86,10 @@ color: white;
  .last-series{
      width : 210px;
      height: 295px;
-     position: absolute;
-     top : 0; 
-     transition: all 1s;
+     background-color: #4DB8E6; 
  }
 
  .last-series-container{
-   position: relative;
-   margin: 0 40%;
-   width: 1050px;
-   height: 295px;
- }
-
-
-
- .welcome-caroussel{
      display: flex;
-     align-items: center;
-     
+     justify-content: space-around;
  }
-
- .welcome-caroussel > img{
- 
-     width: 50px;
-     height: 110px;
-     z-index: 3;
-     position: relative;
-    
- }
-
- #welcome-caroussel-prec{
-left: 39%;
- }
-
- #welcome-caroussel-suiv{
-right: 41%;
- }
- #last-series1{
-    left: -300px;
-    z-index : 0;
- }
-
- #last-series1 >img{
-    width: 70%;
-    margin: 15% 0;
-    filter: brightness(50%);
- }
-
- #last-series2{
-    left: -250px;
-    z-index : 1;
- }
-
- #last-series2 >img{
-    width: 85%;
-    margin: 7.5% 0;
-    filter: brightness(50%);
- }
-
- #last-series3{
-  left: 0px;
-    z-index : 2;
-    
-
- }
-
-#last-series3 >img{
-    width: 100%;
- }
-
- #last-series4{
-    left: 290px;
-    z-index : 1;
- }
-
- #last-series4 >img{
-    width: 85%;
-    margin: 7.5% 0;
-    filter: brightness(50%);
- }
-
- #last-series5{
-    left: 360px;
-    z-index : 0;
-    
- }
-
- #last-series5 >img{
-    width: 70%;
-    margin: 15% 0;
-    filter: brightness(50%);
- }
-
- .lastSeries-title{
-     
-    text-align: center;
-    margin: 5% 0;
-}
- 
