@@ -21,8 +21,8 @@
     <li><a class="nav-bleu" href="{{route('liste')}}"> Les séries</a></li>
         @guest
             
-            <li ><a class="nav-rose" href="{{ route('login') }}">S'inscrire</a></li>
-            <li ><a  class="nav-bleu" href="{{ route('register') }}">Se connecter</a></li>
+            <li ><a class="nav-rose" href="{{ route('register') }}">S'inscrire</a></li>
+            <li ><a  class="nav-bleu" href="{{ route('login') }}">Se connecter</a></li>
             
             
         @else
@@ -46,14 +46,15 @@
 
 <div id="main">
     @yield('content')
-</div>
-<footer>
+    <footer>
 <span>Site créé par la ShrekTeam - Tout droits reservés</span>
 <a href="{{ url('/') }}">
         
         <img class="footer-logo" src="/img/Logo.png" alt="TV List">
     </a>
 </footer>
+</div>
+
 <!-- Scripts -->
 
 </body>
