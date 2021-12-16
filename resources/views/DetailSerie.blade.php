@@ -28,9 +28,16 @@
                 @foreach($episodes as $episode)
                     <tbody>
                         <tr>
-                            <td><input
-                                       type="button"
-                                       value="Déjà vu"></td>
+                            @if(Auth::user())
+                                <td><input
+                                           type="button"
+                                           value="Déjà vu"
+                                           id="{{$episode->id}}">
+                                </td>
+                                @if(isset($_POST['Déjà vu']))
+                                    Episode vu !!
+                                @endif
+                            @endif
                             <td>{{$episode->saison}}</td>
                             <td>{{$episode->numero}} </td>
                             <td>{{$episode->nom}}</td>
