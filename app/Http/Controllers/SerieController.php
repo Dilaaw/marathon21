@@ -27,8 +27,10 @@ class SerieController extends Controller
         $serie =Serie::find($id);
         $episodes=$serie->episodes;
         $comments=$serie->comments;
+        $nbrSaison = $episodes->sortBy('saison')->last()->saison;
 
-        return view('addComment', ['serie' => $serie,'episodes' =>$episodes, 'comments' =>$comments, 'saisons' => ListeController::class->getNbSaison([$serie])]);
+
+        return view('addComment', ['serie' => $serie,'episodes' =>$episodes, 'comments' =>$comments, 'saison' => $nbrSaison]);
 
 
     }

@@ -46,6 +46,7 @@
                             <td>{{$episode->nom}}</td>
                             <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
                             <td><?php echo (html_entity_decode($episode -> resume));?></td>
+                            <td style="color: red;">{{$saison}}</td>
                         </tr>
                     </tbody>
                 @endforeach
