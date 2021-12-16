@@ -18,13 +18,5 @@
         <h3>Aucune série</h3>
     @endif
 
-    <a href="{{route('liste')}}">
-        <h1>Go voir la liste entière des séries dispo</h1>
-    </a>
-
-    <form action="/serie" method="get">
-        <input type="text" placeholder="Rechercher" name="search">
-        <input type="submit">
-    </form>
-
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection
