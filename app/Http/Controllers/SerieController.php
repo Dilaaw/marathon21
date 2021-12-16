@@ -7,7 +7,6 @@ use App\Models\Serie;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SerieController extends Controller
 {
@@ -28,6 +27,7 @@ class SerieController extends Controller
         $serie =Serie::find($id) ;
         $episodes=$serie->episodes->sortBy('saison');
         $comments=$serie->comments;
+        $nbrSaison = $episodes->sortBy('saison')->last()->saison;
         if (Auth::user()) {
             return view('addComment', ['serie' => $serie,'episodes' =>$episodes,
                 'comments' =>$comments]);
@@ -36,8 +36,6 @@ class SerieController extends Controller
                 'comments' =>$comments]);
         }
     }
-
-
 
     public function getRecent(){
         $series = Serie::all();
@@ -130,7 +128,6 @@ class SerieController extends Controller
     }
 
     /**
-     *
      * Display the specified resource.
      *
      * @param  int  $id

@@ -3,46 +3,50 @@
 @section('content')
 
 
-    <h1>Liste des épisodes :</h1>
+    <h1 class="lesSeries">Les séries</h1>
 
-
-    <form action="/serie" method="get">
-        <input type="text" placeholder="Rechercher" name="search">
-        <input type="submit">
+ <div class="recherche-form">
+    <form  action="/serie" method="get">
+        <input class="recherche" type="text" placeholder="Rechercher" name="search">
+        <input class='recherche-btn' type="submit">
     </form>
 
     <form method="get">
         <label for="genre">Choisir genre :</label>
-        <input type="text" id="genre" name="genre" list="listGenre" />
+        <input class="tris" type="text" id="genre" name="genre" list="listGenre" />
         <datalist id="listGenre">
             @foreach($genres as $genre)
                 <option>{{$genre}}</option>
             @endforeach
         </datalist>
         <label for="langue">Choisir langue :</label>
-        <input type="text" id="langue" name="langue" list="listLangue" />
+        <input class="tris" type="text" id="langue" name="langue" list="listLangue" />
         <datalist id="listLangue">
             @foreach($langues as $langue)
                 <option>{{$langue}}</option>
             @endforeach
         </datalist>
-        <input type="submit" value="Filtrer">
+        <input class='tris-btn' type="submit" value="Filtrer">
     </form>
-
+</div>
 
     @if(!empty($series))
+    <div class="series-container">
         @foreach($series as $serie)
-
+        <div class="series">
             <a href="/serie/{{$serie->id}}">
-                <div style="border: solid blue 1px; margin: 10px;">
+                
                 <img src="{{asset($serie -> urlImage)}}">
-                <p>Nom : {{$serie -> nom}} </p>
+                <div class="series-detail">
+                <h5> {{$serie -> nom}} </h5>
                 <p>Genre : {{$serie -> genre}} </p>
                 <p>Langue : {{$serie -> langue}}</p>
                 <p>Nombre de saisons : {{$saisons[$serie->id]}}</p>
                 </div>
             </a>
+            </div>
         @endforeach
+    </div>
     @else
         <h3>Aucune série</h3>
     @endif

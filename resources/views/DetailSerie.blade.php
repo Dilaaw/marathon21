@@ -1,11 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-
     Détail de la serie:
     <br>
     <br>
     @if(!empty($serie))
+            <div class="info-serie">
+            <img src=" {{ asset($serie -> urlImage) }}"/><br>
+            <div class="txt-serie">
+         <h1 style="text-align : center"> <?php echo (html_entity_decode($serie -> nom));?></h1>
+           <div class="ifo-genre"> <b>Genre:</b> <?php echo (html_entity_decode($serie -> genre));?></div>
+           <div class="ifo-resume"><b>résumé: </b>:<?php echo (html_entity_decode($serie -> resume));?></div>
+           <div class="ifo-vo"> <b>VO:</B> <?php echo (html_entity_decode($serie -> langue));?></div>
+           <div class="ifo-sortie">  <b>Date de parution</b> : <?php echo (html_entity_decode($serie -> premiere));?></div>
+           <div class="ifo-avis"> <b>Avis de la redac :</b> <?php echo (html_entity_decode($serie -> avis));?></div>
+            </div>
+            </div>
+
+
+            <table >
 
            Pour la série : {{$serie -> nom}}<br>
            Le genre est : {{$serie -> genre}}<br>
@@ -54,7 +67,7 @@
                                 </td>
                             @endif
                             <td>{{$episode->saison}}</td>
-                            <td>{{$episode->numero}} </td>
+                            <td>{{$episode->numero}}</td>
                             <td>{{$episode->nom}}</td>
                             <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
                             <td>@if($episode->resume==null)
