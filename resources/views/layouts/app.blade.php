@@ -13,18 +13,15 @@
 <body>
 <header>
     <a href="{{ url('/') }}">
-        <img class="header-logo" src="/img/Logo.png" alt="TV List">
+        Ma super appli
     </a>
-
-    <nav>
+</header>
+<!-- Authentication Links -->
+<nav>
     <ul>
-    <li><a class="nav-bleu" href=""> Les séries</a></li>
         @guest
-            
-            <li ><a class="nav-rose" href="{{ route('login') }}">S'inscrire</a></li>
-            <li ><a  class="nav-bleu" href="{{ route('register') }}">Se connecter</a></li>
-            
-            
+            <li><a href="{{ route('login') }}">Login</a></li>
+            <li><a href="{{ route('register') }}">Register</a></li>
         @else
             <li> Bonjour {{ Auth::user()->name }}</li>
             @if (Auth::user())
@@ -41,19 +38,9 @@
         @endguest
     </ul>
 </nav>
-</header>
-<!-- Authentication Links -->
-
 <div id="main">
     @yield('content')
 </div>
-<footer>
-<span>Site créé par la ShrekTeam - Tout droits reservés</span>
-<a href="{{ url('/') }}">
-        
-        <img class="footer-logo" src="/img/Logo.png" alt="TV List">
-    </a>
-</footer>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

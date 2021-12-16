@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Utils;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class ListeController extends Controller
 {
@@ -17,86 +14,56 @@ class ListeController extends Controller
      */
     public function index()
     {
-        $allSeries = Serie::all();
-        $saisons = [];
-        foreach ($allSeries as $serie) {
-            $saisons[$serie->id] = $this->getNbSaison($serie);
-        }
-        return view('liste', ['series' => $allSeries, 'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $saisons]);
+        $series = Serie::all();
+        return view('welcome', ['series' => $series]);
     }
 
-    public function getListe()
+    public function getListe($genrechoisi = "all")
     {
-
-        if (isset($_GET['search'])){
-            return $this->getByName($_GET['search']);
-
-        }
-
-        if (isset($_GET['langue'])){
-            $languechoisie = $_GET['langue'];
-        } else {
-            $languechoisie ="all";
-        }
-        if (isset($_GET['genre'])) {
-            $genrechoisi = $_GET['genre'];
-        } else {
-            $genrechoisi = "all";
-        }
-        $allSeries = Serie::all();
         $series = [];
-        $saisons= [];
-
-        foreach ($allSeries as $serie) {
-            if     ($serie->genre == $genrechoisi && $serie->langue == $languechoisie
-                || ($genrechoisi == "all" && $serie->langue == $languechoisie)
-                || ($serie->genre == $genrechoisi && $languechoisie == "all"
-                    || ($genrechoisi == "all" && $languechoisie == "all")))
-            {
-                $series[] = $serie;
+        if ($genrechoisi != "all") {
+            $allSeries = Serie::all();
+            foreach ($allSeries as $serie) {
+                if ($genrechoisi == $serie->genre) {
+                    $series[] = $serie;
+                }
             }
+        } else {
+            $series = Serie::all();
         }
-        foreach ($series as $serie) {
-            $saisons[$serie->id] = $this->getNbSaison($serie);
-        }
-        return view('liste', ['series' => $series,'genres'=> $this->getAllGenre($allSeries),'langues'=> $this->getAllLangue($allSeries), 'saisons' => $saisons]);
-    }
 
-    public function getAllGenre($allSeries) {
+
+        $saisons = [];
         $genres = [];
-        foreach ($allSeries as $serie) {
+
+        foreach ($series as $serie) {
+            // On récupère tout les genres possibles pour les boutons de tri par genre
             if (!in_array($serie->genre, $genres)) {
                 $genres[] = $serie->genre;
             }
         }
-        return $genres;
-    }
-    public function getAllLangue($allSeries) {
-        $langues = [];
-        foreach ($allSeries as $serie) {
-            if (!in_array($serie->langue, $langues)) {
-                $langues[] = $serie->langue;
-            }
-        }
-        return $langues;
-    }
-    public function getNbSaison($serie) {
-        $episodes = $serie->episodes;
-        $episodes->sortByDesc('saison');
-        return $episodes->last()->saison;
-    }
 
-    public function getByName($name) {
-        $allSeries = Serie::all();
-        foreach ($allSeries as $serie) {
-            if ($serie->nom == $name) {
-                //echo $serie->id . $serie->nom;
-                $str = "/serie/".$serie->id;
-                return view($str, [SerieController::class,'getSerie']);
-            }
-        }
-    }
+        foreach ($series as $serie) {
 
+            if ($genrechoisi != "all") {
+
+            } else {
+
+            }
+
+
+
+            // On récupère le nombre de saisons des séries
+            $episodes = $serie->episodes;
+            $episodes->sortByDesc('saison');
+            $saison[$serie->id] = $episodes->Last()->saison;
+
+        }
+
+
+
+        return view('liste', ['series' => $series, 'saisons' => $saison, 'genres' => $genres]);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ListeController;
 use App\Http\Controllers\SerieController;
-use App\Models\Serie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,15 +35,7 @@ Route::get("/profil", function () {
     return view('profil');
 })->name("profil");
 
-Route::get("/liste", [ListeController::class, 'getListe'])->name('all_series');
-
-
-
-
-
-
-
-
+Route::get("/liste",[ListeController::class, 'getListe'])->name('liste');
 
 Route::fallback(function () {
     return view('404');
