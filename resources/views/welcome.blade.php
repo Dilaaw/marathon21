@@ -22,4 +22,6 @@
     
         <h3>Aucune série</h3>
     @endif
+
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

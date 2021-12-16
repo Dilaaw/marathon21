@@ -1,28 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-    Liste des épisodes :
 
-    @if(!empty($genres))
-        @foreach($genres as $genre)
-            <button >
-                {{$genre}}
-            </button>
-        @endforeach
-    @endif
+
+    <h1>Liste des épisodes :</h1>
+
+
+    <form action="/serie" method="get">
+        <input type="text" placeholder="Rechercher" name="search">
+        <input type="submit">
+    </form>
+
+    <form method="get">
+        <label for="genre">Choisir genre :</label>
+        <input type="text" id="genre" name="genre" list="listGenre" />
+        <datalist id="listGenre">
+            @foreach($genres as $genre)
+                <option>{{$genre}}</option>
+            @endforeach
+        </datalist>
+        <label for="langue">Choisir langue :</label>
+        <input type="text" id="langue" name="langue" list="listLangue" />
+        <datalist id="listLangue">
+            @foreach($langues as $langue)
+                <option>{{$langue}}</option>
+            @endforeach
+        </datalist>
+        <input type="submit" value="Filtrer">
+    </form>
 
 
     @if(!empty($series))
         @foreach($series as $serie)
 
-            <div style="border: solid blue 1px; margin: 10px;">
-                <img src="{{$serie -> urlImage}}">
+            <a href="/serie/{{$serie->id}}">
+                <div style="border: solid blue 1px; margin: 10px;">
+                <img src="{{asset($serie -> urlImage)}}">
                 <p>Nom : {{$serie -> nom}} </p>
                 <p>Genre : {{$serie -> genre}} </p>
                 <p>Langue : {{$serie -> langue}}</p>
                 <p>Nombre de saisons : {{$saisons[$serie->id]}}</p>
-
-            </div>
+                </div>
+            </a>
         @endforeach
     @else
         <h3>Aucune série</h3>

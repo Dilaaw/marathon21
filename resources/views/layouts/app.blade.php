@@ -18,7 +18,7 @@
 
     <nav>
     <ul>
-    <li><a class="nav-bleu" href=""> Les séries</a></li>
+    <li><a class="nav-bleu" href="{{route('liste')}}"> Les séries</a></li>
         @guest
             
             <li ><a class="nav-rose" href="{{ route('login') }}">S'inscrire</a></li>
@@ -55,6 +55,6 @@
     </a>
 </footer>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
