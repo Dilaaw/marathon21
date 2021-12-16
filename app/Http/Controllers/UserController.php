@@ -29,7 +29,6 @@ class UserController extends Controller
             }
             $cpt+=$el->duree;
         }
-        dd($lst);
         return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt]);
     }
     /**

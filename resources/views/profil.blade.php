@@ -32,11 +32,11 @@
         Séries vues :
 
         @foreach($seen as $seens)
-            {{$seens->episode_id}}<br>
+            {{$seens->nom}}<br>
         @endforeach
 
     @else
-        T'es pas co Khoya
+        Erreur : Vous n'êtes pas connecté !
     @endif
 @endsection
 
