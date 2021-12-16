@@ -23,6 +23,8 @@ Route::any('/', [SerieController::class, 'getRecent'])->name('welcome');
 
 Route::any('/serie/{id}', [SerieController::class,'getSerie']);
 
+Route::resource('/serie',SerieController::class);
+
 Route::get("/login", function () {
     return view('auth/login');
 })->name('login');

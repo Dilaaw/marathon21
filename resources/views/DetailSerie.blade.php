@@ -29,14 +29,16 @@
                     <tbody>
                         <tr>
                             @if(Auth::user())
-                                <td><input
-                                           type="button"
-                                           value="Déjà vu"
-                                           id="{{$episode->id}}">
+                                <td>
+                                    <form action="{{route('serie.store')}}" method="POST">
+                                        <button
+                                               type="submit"
+                                               name="maBox"
+                                               value="maBox"
+                                               id="{{$episode->id}}">Déjà vu
+                                        </button>
+                                    </form>
                                 </td>
-                                @if(isset($_POST['Déjà vu']))
-                                    Episode vu !!
-                                @endif
                             @endif
                             <td>{{$episode->saison}}</td>
                             <td>{{$episode->numero}} </td>

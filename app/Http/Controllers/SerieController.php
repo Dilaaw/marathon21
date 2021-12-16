@@ -30,6 +30,8 @@ class SerieController extends Controller
                                             'comments' =>$comments]);
     }
 
+
+
     public function getRecent(){
         $series = Serie::all();
         $series = $series->sortByDesc('premiere');
@@ -65,9 +67,22 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return;
+        $this->validate(
+            $request,
+            [
+                'maBox' =>'required',
+            ]
+        );
+        dd($request);
+        DB::table("seen")->insert(
+            [
+                'user_id'=>Auth::user()->id,
+                'episode_id'=>$request->maBox,
+                'date_seen'=>now(),
+            ]
+        );
     }
-
     /**
      * Display the specified resource.
      *
