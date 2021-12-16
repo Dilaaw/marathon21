@@ -29,15 +29,18 @@
 
         <br><br>
 
+        Durée visionnée : {{$count}} minutes<br><br>
         Séries vues : <br>
 
         @foreach($seen as $seens)
             {{$seens->nom}}<br>
         @endforeach
 
+        <br><br>
+        <b>Commentaires à valider</b><br><br>
         @if(Auth::user()->administrateur== 1)
             @foreach($content as $contents)
-                {{$contents}}<br>
+                {{$contents}}<br><br>
             @endforeach
         @endif
 
