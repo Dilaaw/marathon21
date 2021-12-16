@@ -7,6 +7,7 @@ use App\Models\Serie;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SerieController extends Controller
 {
@@ -33,8 +34,12 @@ class SerieController extends Controller
         $comments=$serie->comments;
         $nbrSaison = $episodes->sortBy('saison')->last()->saison;
         if (Auth::user()) {
+            $episodeVu = DB::select('select episode_id from seen where user_id='.Auth::user()->id);
+            foreach ($episodeVu as $e) {
+                $episodeVus[] = $e->episode_id;
+            }
             return view('addComment', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
+                'comments' =>$comments,'saison' => $nbrSaison,'episodeVu'=>$episodeVus]);
         } else {
             return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
                 'comments' =>$comments,'saison' => $nbrSaison]);
@@ -76,11 +81,11 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
-        $episodeVu = DB::select('select episode_id from seen ');
+        $episodeVu = DB::select('select episode_id from seen where user_id='.Auth::user()->id);
         if($request->serieBox!=null) {
             $serie =Serie::find($request->serieBox) ;
             foreach ($serie->episodes as $episodes) {
-                if(!in_array("$episodes",$episodeVu))
+                if(!in_array($episodes,$episodeVu,true))
                     DB::table("seen")->insert(
                         [
                             'user_id' => Auth::user()->id,
@@ -93,7 +98,7 @@ class SerieController extends Controller
             return $this->getSerie($serieID);
         }
         else {
-            if(!in_array("$request->maBox",$episodeVu))
+            if(!in_array($request->maBox,$episodeVu,true))
                 DB::table("seen")->insert(
                     [
                         'user_id' => Auth::user()->id,
@@ -105,30 +110,6 @@ class SerieController extends Controller
                 $serieID = $episodeID->serie_id;
                 return $this->getSerie($serieID);
             }
-    }
-
-    public function storeSer(Request $request)
-    {
-        $this->validate(
-            $request,
-            [
-                'serieBox' => 'required',
-            ]
-        );
-        foreach ($request->serieBox->episodes as $episodes){
-            DB::table("seen")->insert(
-                [
-                    'user_id' => Auth::user()->id,
-                    'episode_id' => $episodes->id,
-                    'date_seen' => now(),
-                ]
-            );
-        }
-
-
-
-
-        return $this->getSerie($request->serieBox);
     }
 
     /**
@@ -165,7 +146,6 @@ class SerieController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -176,5 +156,4 @@ class SerieController extends Controller
     {
         //
     }
-
 }
