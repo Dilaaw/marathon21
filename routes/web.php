@@ -31,9 +31,7 @@ Route::get("/register", function () {
     return view('auth/register');
 })->name('register');
 
-Route::get("/profil", function () {
-    return view('profil');
-})->name("profil");
+Route::get("/profil", [\App\Http\Controllers\UserController::class, 'index'])->name('profil');
 
 Route::get("/liste",[ListeController::class, 'getListe'])->name('liste');
 
