@@ -29,14 +29,20 @@
 
         <br><br>
 
-        Séries vues :
+        Séries vues : <br>
 
         @foreach($seen as $seens)
-            {{$seens->episode_id}}<br>
+            {{$seens->nom}}<br>
         @endforeach
 
+        @if(Auth::user()->administrateur== 1)
+            @foreach($content as $contents)
+                {{$contents}}<br>
+            @endforeach
+        @endif
+
     @else
-        T'es pas co Khoya
+        Erreur : Vous n'êtes pas connecté !
     @endif
 @endsection
 
