@@ -301,4 +301,15 @@ border: solid #4DB8E6 2px;
    font-size: 4rem;
 }
 
+.info-serie{
+   display: flex;
 
+   margin: 5% 0;
+}
+
+.info-serie img{
+   margin: 0 10%;
+} 
+.txt-serie{
+   width : 35%;
+}
