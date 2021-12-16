@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Utils;
 use PhpParser\Node\Expr\Cast\Object_;
 
 class ListeController extends Controller
@@ -26,6 +27,12 @@ class ListeController extends Controller
 
     public function getListe()
     {
+
+        if (isset($_GET['search'])){
+            return $this->getByName($_GET['search']);
+
+        }
+
         if (isset($_GET['langue'])){
             $languechoisie = $_GET['langue'];
         } else {
@@ -80,9 +87,14 @@ class ListeController extends Controller
     }
 
     public function getByName($name) {
-        $series = Serie::all();
-        $serie = DB::select('select * from series where nom like $name');
-        dd($serie);
+        $allSeries = Serie::all();
+        foreach ($allSeries as $serie) {
+            if ($serie->nom == $name) {
+                //echo $serie->id . $serie->nom;
+                $str = "/serie/".$serie->id;
+                return view($str, [SerieController::class,'getSerie']);
+            }
+        }
     }
 
 

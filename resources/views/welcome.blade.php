@@ -16,6 +16,9 @@
         <h1>Go voir la liste entière des séries dispo</h1>
     </a>
 
-
+    <form action="/liste" method="get">
+        <input type="text" placeholder="Rechercher" name="search">
+        <input type="submit">
+    </form>
 
 @endsection

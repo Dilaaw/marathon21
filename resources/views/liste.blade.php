@@ -5,6 +5,12 @@
 
     <h1>Liste des épisodes :</h1>
 
+
+    <form method="get">
+        <input type="text" placeholder="Rechercher" name="search">
+        <input type="submit">
+    </form>
+
     <form method="get">
         <label for="genre">Choisir genre</label>
         <input type="text" id="genre" name="genre" list="listGenre" />
