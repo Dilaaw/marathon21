@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    Détail de la serie:
-    <br>
-    <br>
-    @if(!empty($serie))
 
-           Pour la série : {{$serie -> nom}}<br>
-           Le genre est : {{$serie -> genre}}<br>
-           Petit résume : {{$serie -> resume}}<br>
-           La langue disponible est : {{$serie -> langue}}<br>
-           Cette serie est sorti : {{$serie -> premiere}}<br>
-           La redaction a dit : {{$serie -> avis}}<br><br>
-           <img src=" {{ asset($serie -> urlImage) }}"/><br>
-            <table border>
+    @if(!empty($serie))
+            <div class="info-serie">
+            <img src=" {{ asset($serie -> urlImage) }}"/><br>
+            <div class="txt-serie">
+         <h1 style="text-align : center"> <?php echo (html_entity_decode($serie -> nom));?></h1>
+           <div class="ifo-genre"> <b>Genre:</b> <?php echo (html_entity_decode($serie -> genre));?></div>
+           <div class="ifo-resume"><b>résumé: </b>:<?php echo (html_entity_decode($serie -> resume));?></div>
+           <div class="ifo-vo"> <b>VO:</B> <?php echo (html_entity_decode($serie -> langue));?></div>
+           <div class="ifo-sortie">  <b>Date de parution</b> : <?php echo (html_entity_decode($serie -> premiere));?></div>
+           <div class="ifo-avis"> <b>Avis de la redac :</b> <?php echo (html_entity_decode($serie -> avis));?></div>
+            </div>
+            </div>
+
+      
+            <table >
                 <thead>
                     <tr>
                         <th>Saison:</th>
@@ -30,7 +33,7 @@
                             <td>{{$episode->numero}}</td>
                             <td>{{$episode->nom}}</td>
                             <td><img src=" {{ asset($episode -> urlImage) }}"/><br></td>
-                            <td>{{$episode->resume}}</td>
+                            <td><?php echo (html_entity_decode($episode -> resume));?></td>
                         </tr>
                     </tbody>
                 @endforeach
