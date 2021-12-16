@@ -28,7 +28,7 @@
         @else
             <li> Bonjour {{ Auth::user()->name }}</li>
             @if (Auth::user())
-                <li><a href="#">Des liens spécifiques pour utilisateurs connectés..</a></li>
+                <li><a href="/profil/{{Auth::user()->id}}">Profil</a></li>
             @endif
             <li><a href="{{ route('logout') }}"
                    onclick="event.preventDefault();

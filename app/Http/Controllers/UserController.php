@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Serie;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -33,8 +35,20 @@ class UserController extends Controller
         return view('profil',["user"=>$user,"seen"=>$lst,"count"=>$cpt]);
     }
 
-    public function addComment(){
+    public function addComment($request, $serie){
 
+
+        DB::table('comments')->insert(
+            [
+                'content'=>$request['commentaire'],
+                'note'=>$request['note'],
+                'validated'=>false,
+                'user_id'=>Auth::user()->getAuthIdentifier(),
+                'serie_id'=>$serie->id,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+            ]
+        );
     }
 
     /**

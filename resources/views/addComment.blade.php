@@ -4,7 +4,8 @@
 
 
     @if (Auth::user())
-        <form action=".addComment" method="post">
+        <form method="post">
+            @csrf
             <label for="commentaire">
                 Commentaire :
                 <input type="textarea" name="commentaire" rows="5" cols="33">

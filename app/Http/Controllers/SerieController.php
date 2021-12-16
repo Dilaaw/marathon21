@@ -24,7 +24,11 @@ class SerieController extends Controller
     }
 
     public function getSerie($id){
-        $serie =Serie::find($id) ;
+        $serie =Serie::find($id);
+        if (isset($_POST['commentaire']) && isset($_POST['note'])) {
+            $con = new UserController();
+            $con->addComment($_POST, $serie);
+        }
         $episodes=$serie->episodes->sortBy('saison');
         $comments=$serie->comments;
         $nbrSaison = $episodes->sortBy('saison')->last()->saison;
@@ -33,7 +37,7 @@ class SerieController extends Controller
                 'comments' =>$comments]);
         } else {
             return view('DetailSerie', ['serie' => $serie,'episodes' =>$episodes,
-                'comments' =>$comments]);
+                'comments' =>$comments,'saison' => $nbrSaison]);
         }
     }
 
