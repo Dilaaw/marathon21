@@ -55,7 +55,10 @@
            Commentaires :<br>
            @foreach($comments as $comments)
                <br>
-                {{$comments->content}}<br>
+                {{$comments->content}}
+               @if($comments)
+
+               <br>
                <br>
            @endforeach
 
